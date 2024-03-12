@@ -11,7 +11,7 @@ const Home = () => {
 
                 <div className="md:mt-[5rem] sm:mt-[2rem]">
                     <p className="font-poppins font-normal text-black text-[53px]">
-                        Welcome to EchoSign!
+                        Welcome to TafsiriAI!
                         Your #1 AI KSL translator
                         app!
                     </p>
@@ -29,7 +29,8 @@ const Home = () => {
                         </svg>
                     </button>
 
-                    {/*<div id="dropdown"*/}
+
+                    {/* <div id="dropdown"*/}
                     {/*     className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">*/}
                     {/*    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200"*/}
                     {/*        aria-labelledby="dropdownDefaultButton">*/}
@@ -41,7 +42,7 @@ const Home = () => {
                     {/*            <a href="#"*/}
                     {/*               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>*/}
                     {/*        </li>*/}
-                    {/*        <li>*/}
+                           {/* <li> */}
                     {/*            <a href="#"*/}
                     {/*               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>*/}
                     {/*        </li>*/}
@@ -51,7 +52,7 @@ const Home = () => {
                     {/*                out</a>*/}
                     {/*        </li>*/}
                     {/*    </ul>*/}
-                    {/*</div>*/}
+                    {/*</div> */}
                 </div>
             </div>
         </div>
