@@ -5,6 +5,8 @@ import Home from "./Home";
 import Contact from "./Contact";
 import Login from "./Login";
 import Signup from "./Signup";
+import WebcamComponent from "./Translate";
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/translate" element={<WebcamComponent/>}/>
       </Routes>
     </div>
   );
