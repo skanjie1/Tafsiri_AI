@@ -9,7 +9,7 @@ const Home = () => {
                     <img className="md:h-[640px] w-[500px] sm:h-full" alt="HomeImg" src={HomeImg}/>
                 </div>
 
-                <div className="md:mt-[5rem] sm:mt-[2rem]">
+                <div className="md:mt-[8rem] sm:mt-[2rem]">
                     <p className="font-poppins font-normal text-black text-[53px]">
                         Welcome to TafsiriAI!
                         Your #1 AI KSL translator

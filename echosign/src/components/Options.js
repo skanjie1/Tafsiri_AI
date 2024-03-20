@@ -6,7 +6,7 @@ const Options = () => {
         <div className="container mx-auto bg-white">
             <div className="grid md:grid-cols-2">
                 <div className="mt-[5rem] flex justify-center md:justify-start">
-                    <img className="md:h-[638px] w-[398px] sm:h-full" alt="HomeImg2" src={HomeImg2}/>
+                    <img className="md:h-[640px] w-[400px] sm:h-full" alt="HomeImg2" src={HomeImg2}/>
                 </div>
 
                 <div className="md:mt-[8rem] sm:mt-[2rem]">
