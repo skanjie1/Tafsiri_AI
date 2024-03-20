@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import translate from "../assets/images/translate.png";
+import HomeImg4 from "../assets/images/HomeImg4.png";
 
 const WebcamComponent = () => {
     const videoRef = useRef();
@@ -30,23 +30,19 @@ const WebcamComponent = () => {
 
     return (
         <div className="container mx-auto bg-white">
+            <div className="grid md:grid-cols-2 gap-4">
+                <div className="mt-[5rem] flex justify-center md:justify-start">
+                    <img className="md:h-[605px] w-[302px] sm:h-full" alt="HomeImg4" src={HomeImg4}/>
+                </div>
 
-        <div className="grid md:grid-cols-2 gap-4">
-        <div className="mt-[3rem]">
-            <img className="md:h-[640px] w-[350px] sm:h-full" alt="People" src={translate}/>
-        </div>
-        
+                <div className="md:mt-[7rem] sm:mt-[2rem] flex flex-col items-center sm:items-start">
+                    <p className="font-poppins font-normal text-[32px] text-[#121212]">Translating...</p>
+                    <div className="mt-[3rem] mx-auto sm:justify-start">
+                        <video ref={videoRef} autoPlay playsInline width="640" height="480"></video>
+                    </div>
+                </div>
 
-        <div>
-        <p className="font-poppins font-normal text-black text-[18px] mt-[3rem]">
-                    Translating...
-                    </p>
-            <div className='mt-[4rem]'>
-            <video ref={videoRef} autoPlay playsInline width="640" height="480"></video>
             </div>
-        </div>
-        
-        </div>
         </div>
     );
 };
