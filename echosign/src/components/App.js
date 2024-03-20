@@ -6,6 +6,8 @@ import Contact from "./Contact";
 import Login from "./Login";
 import Signup from "./Signup";
 import WebcamComponent from "./Translate";
+import Start from "./Start";
+import Options from "./Options";
 
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
+        <Route path="/start" element={<Start/>}/>
+        <Route path="/options" element={<Options/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
