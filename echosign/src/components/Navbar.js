@@ -3,6 +3,7 @@ import Logo from "../assets/images/image 1.png";
 import {NavLink} from "react-router-dom";
 
 const Navbar = () => {
+    
     return (
         <nav className="container  mx-auto bg-white border-gray-200 ">
             <div className=" flex flex-wrap items-center justify-between py-4">

@@ -10,7 +10,8 @@ def detect_gesture():
     
     while True:
         ret, frame = cap.read()
-        # Your gesture detection logic using OpenCV goes here
+        
+    #   logic
         
         # Display the webcam feed
         cv2.imshow('Webcam', frame)
