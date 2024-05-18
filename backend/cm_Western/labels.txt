@@ -1,0 +1,9 @@
+0 Hello there!
+1 Thank you so much!
+2 Yes!
+3 No
+4 Our father
+5 The government
+6 Nairobi
+7 I love you!
+8 That's smart!

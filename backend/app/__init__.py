@@ -14,9 +14,7 @@ def create_app():
     
     with app.app_context():
             from .models import Region, SignEntry
-            print("creating tables...")
             db.create_all()
-            print("tables created")
 
     from .routes import main as main_blueprint
     app.register_blueprint(main_blueprint)

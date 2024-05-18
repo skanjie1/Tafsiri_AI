@@ -1,0 +1,8 @@
+0 Hello there!
+1 Thank you so much!
+2 Our father
+3 Yes
+4 No
+5 The government
+6 Very smart indeed
+7 I love you

@@ -1,66 +1,74 @@
 from flask import Blueprint, jsonify, request
-from .models import db, Region, SignEntry
 import cv2
 import numpy as np
-from cvzone.HandTrackingModule import HandDetector
-from cvzone.ClassificationModule import Classifier
-import math
+from keras.models import load_model
+import os
 
 main = Blueprint('main', __name__)
 
-detector = HandDetector(maxHands=1)
-classifier = Classifier("Model/keras_model.h5", "Model/labels.txt")
+models = {}
+labels_dict = {}
 
-labels = ["Hello", "I love you", "No", "Okay", "Please", "Thank you", "Yes"]
+def get_model(region_name):
+    print(f"Loading model for region: {region_name}")
+    if region_name not in models:
+        if region_name == 'Nairobi':
+            model_path = os.path.join('cm_Nairobi', 'keras_model.h5')
+            labels_path = os.path.join('cm_Nairobi', 'labels.txt')
+        elif region_name == 'Western':
+            model_path = os.path.join('cm_Western', 'keras_model.h5')
+            labels_path = os.path.join('cm_Western', 'labels.txt')
+        elif region_name == 'Coastal':
+            model_path = os.path.join('cm_Coastal', 'keras_model.h5')
+            labels_path = os.path.join('cm_Coastal', 'labels.txt')
+        else:
+            raise ValueError(f"Unknown region: {region_name}")
+        
+        try:
+            models[region_name] = load_model(model_path, compile=False)
+            with open(labels_path, "r") as file:
+                labels_dict[region_name] = [line.strip() for line in file.readlines()]
+        except Exception as e:
+            print(f"Error loading model or labels for region {region_name}: {str(e)}")
+            raise ValueError(f"Could not load model or labels for region {region_name}")
 
-@main.route('/')
-def home():
-    return "Welcome to the KSL Translator API"
+    return models[region_name], labels_dict[region_name]
 
 @main.route('/select_region', methods=['POST'])
 def select_region():
     region_name = request.json.get('region')
-    print(f"Received region: {region_name}")  
-    region = Region.query.filter_by(name=region_name).first()
-    if region:
-        return jsonify({'message': f'Region selected: {region.name}', 'id': region.id}), 200
-    else:
-        return jsonify({'message': 'Region not found'}), 404
+    print(f"Received region selection request: {region_name}")
+    try:
+        get_model(region_name)  # Pre-load the model when the region is selected
+        return jsonify({'message': f'Region selected: {region_name}'}), 200
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 500
 
 @main.route('/process_image', methods=['POST'])
 def process_image():
-    file = request.files['image']
-    in_memorty_file = np.frombuffer(file.read(), np.uint8)
-    img = cv2.imdecode(in_memorty_file, cv2.IMREAD_COLOR)
-    
-    hands, img  = detector.findHands(img)
-    sign = "Translating..."
-    if hands:
-        hand = hands[0]
-        x, y, w, h = hand['bbox']
-        offset = 20
-        imgSize = 300
-        imgWhite = np.ones((imgSize, imgSize, 3), np.uint8) * 255
+    print(request.form) 
+    region_name = request.form.get('region')
+    print(f"Processing image for region: {region_name}") 
+    if not region_name:
+        return jsonify({'error': 'Region not specified'}), 400
 
-        # Process crop and aspect ratio
-        imgCrop = img[y-offset:y + h + offset, x-offset:x + w + offset]
-        aspectRatio = h / w
+    try:
+        file = request.files['image']
+        in_memory_file = np.frombuffer(file.read(), np.uint8)
+        img = cv2.imdecode(in_memory_file, cv2.IMREAD_COLOR)
 
-        if aspectRatio > 1:
-            k = imgSize / h
-            wCal = math.ceil(k * w)
-            imgResize = cv2.resize(imgCrop, (wCal, imgSize))
-            wGap = math.ceil((imgSize - wCal) / 2)
-            imgWhite[:, wGap: wCal + wGap] = imgResize
-        else:
-            k = imgSize / w
-            hCal = math.ceil(k * h)
-            imgResize = cv2.resize(imgCrop, (imgSize, hCal))
-            hGap = math.ceil((imgSize - hCal) / 2)
-            imgWhite[hGap: hCal + hGap, :] = imgResize
+        model, labels = get_model(region_name)
+        img_resize = cv2.resize(img, (224, 224))
+        img_array = np.array(img_resize, dtype=np.float32)
+        img_normalized = (img_array / 127.5) - 1
+        img_normalized = img_normalized.reshape((1, 224, 224, 3))
 
-        # Make prediction
-        prediction, index = classifier.getPrediction(imgWhite, draw=False)
-        if index >= 0 and index < len(labels):
-            sign = labels[index]
-    return jsonify({'sign': sign})
+        predictions = model.predict(img_normalized)
+        predicted_index = np.argmax(predictions[0])
+        predicted_label = labels[predicted_index]
+        confidence = predictions[0][predicted_index]
+
+        return jsonify({'sign': predicted_label, 'confidence': float(confidence)})
+    except Exception as e:
+        print(f"Error processing image for region {region_name}: {str(e)}")
+        return jsonify({'error': 'Failed to process image'}), 500
