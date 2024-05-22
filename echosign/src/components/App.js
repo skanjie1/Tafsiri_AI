@@ -9,6 +9,7 @@ import Signup from "./Signup";
 import WebcamComponent from "./Translate";
 import Start from "./Start";
 import Options from "./Options";
+import Responsive from "./Response";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/translate" element={<WebcamComponent/>}/>
+            <Route path="/response" element={<Responsive/>}/>
           </Routes>
       </div>
     );

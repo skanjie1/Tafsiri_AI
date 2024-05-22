@@ -12,7 +12,7 @@ const Options = () => {
     };
 
     const handleTextTranslation = () => {
-        navigate('/translate', { state: { region } }); // Navigate directly to translate text with region state
+        navigate('/response', { state: { region } }); // Navigate directly to translate text with region state
     };
 
     return (
