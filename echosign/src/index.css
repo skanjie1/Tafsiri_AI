@@ -2,3 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.goog-logo-link, .goog-te-gadget span {
+    display: none !important;
+}
+.goog-te-gadget {
+    font-size: 0 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+.goog-te-combo {
+    border-radius: 20px !important;
+}
+
+

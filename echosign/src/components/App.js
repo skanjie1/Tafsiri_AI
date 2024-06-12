@@ -10,6 +10,8 @@ import WebcamComponent from "./Translate";
 import Start from "./Start";
 import Options from "./Options";
 import Responsive from "./Response";
+import BitTranslate from "./Bittranslate";
+import Bitmoji from "./Bitmoji";
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/translate" element={<WebcamComponent/>}/>
             <Route path="/response" element={<Responsive/>}/>
+            <Route path="/bittranslate" element={<BitTranslate/>}/>
+            <Route path="/bitmoji" element={<Bitmoji/>}/>
           </Routes>
       </div>
     );
