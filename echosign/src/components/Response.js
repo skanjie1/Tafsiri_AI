@@ -11,6 +11,10 @@ import Fake from "../assets/gifs/fake.mp4";
 import Forget from "../assets/gifs/forget.mp4";
 import Hope from "../assets/gifs/hope.mp4";
 import Ignore from "../assets/gifs/ignore.mp4";
+import daughter from "../assets/gifs/daughter.mp4";
+import yesterday from "../assets/gifs/yesterday.mp4"
+import birth from "../assets/gifs/birth.mp4";
+import upset from "../assets/gifs/upset.mp4"
 import { IoIosArrowDropdown, IoIosArrowBack } from "react-icons/io";
 import { IoMdFunnel } from "react-icons/io";
 import Modal from 'react-modal';
@@ -31,6 +35,11 @@ const Responsive = () => {
         { name: 'Hope', gloss: 'HOPE', translation: 'aspiration, desire, wish', type: 'video', source: Hope },
         { name: 'Forget', gloss: 'FORGET', translation: 'unremember, overlook, neglect', type: 'video', source: Forget },
         { name: 'Ignore', gloss: 'IGNORE', translation: 'disregard, overlook, neglect', type: 'video', source: Ignore },
+        { name: 'Daughter', gloss: 'DAUGHTER', translation: 'girl, offspring, girl', type: 'video', source: daughter },
+        { name: 'Yesterday', gloss: 'YESTERDAY', translation: 'yesterday, past, time', type: 'video', source: yesterday },
+        { name: 'Birth', gloss: 'BIRTH', translation: 'birthday, born, birth to', type: 'video', source: birth },
+        { name: 'Upset', gloss: 'UPSET', translation: 'bothered, distress, distraught', type: 'video', source: upset },
+     
         { name: 'Thank You', gloss: 'THANK YOU', translation: 'gratitude, appreciation, grateful', type: 'image', source: Thanks },
         { name: 'Yes', gloss: 'YES', translation: 'affirmative, agree, okay', type: 'image', source: Yes },
         { name: 'No', gloss: 'NO', translation: 'negative, disagree, decline', type: 'image', source: Thanks },
@@ -113,7 +122,7 @@ const Responsive = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 justify-items-center mx-4 sm:mx-10 mt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 justify-items-center mx-4 sm:mx-10 mt-2">
                 {displayedSigns.map((sign, index) => (
                     <div
                         key={index}
